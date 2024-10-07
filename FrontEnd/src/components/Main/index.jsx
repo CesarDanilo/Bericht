@@ -21,10 +21,24 @@ const Main = () => {
                 </div>
                 {/* Cards de relatorios pendentes */}
                 <div className="flex-col p-3 space-y-3 mt-3" >
-                    <Cards />
-                    <Cards />
-                    <Cards />
-                    <Cards />
+                    <Cards
+                        empresa={"Nome da empresa aqui"}
+                        descricao={"Descrição do relatorio"}
+                        dataInicial={"01/10/2024"}
+                        dataFinal={"01/10/2024"}
+                    />
+                    <Cards
+                        empresa={"Nome da empresa aqui"}
+                        descricao={"Descrição do relatorio"}
+                        dataInicial={"01/10/2024"}
+                        dataFinal={"01/10/2024"}
+                    />
+                    <Cards
+                        empresa={"Nome da empresa aqui"}
+                        descricao={"Descrição do relatorio"}
+                        dataInicial={"01/10/2024"}
+                        dataFinal={"01/10/2024"}
+                    />
                 </div>
             </div>
         </div>
