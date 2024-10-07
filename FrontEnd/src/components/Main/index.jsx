@@ -20,7 +20,12 @@ const Main = () => {
                     </button>
                 </div>
                 {/* Cards de relatorios pendentes */}
-                <Cards />
+                <div className="flex-col p-3 space-y-3 mt-3" >
+                    <Cards />
+                    <Cards />
+                    <Cards />
+                    <Cards />
+                </div>
             </div>
         </div>
     )
