@@ -49,7 +49,7 @@
 // export default Main;
 
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Cards from "../RelatoriosPendentes/Cards";
 
 const Main = () => {
@@ -61,6 +61,8 @@ const Main = () => {
         dataFinal: ''
     });
 
+    const [getDadosRelatorioLocal, setGetDadosRelatorioLocal] = useState([]);
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setNewReport((prev) => ({ ...prev, [name]: value }));
@@ -70,9 +72,15 @@ const Main = () => {
         e.preventDefault();
         // Aqui você pode adicionar a lógica para salvar o novo relatório
         console.log('Novo Relatório:', newReport);
+        localStorage.setItem("Lista-de-relatorios", newReport);
         setIsDialogOpen(false); // Fecha o diálogo após o envio
         clearNextSubmitButton();
     };
+
+    const getDataRelatoriosLocalStorage = async () => {
+        setGetDadosRelatorioLocal(localStorage.getItem("Lista-de-relatorios"))
+        console.log("Retornando os dados do localStorage: ", getDadosRelatorioLocal())
+    }
 
     const clearNextSubmitButton = () => {
         setNewReport({
@@ -83,12 +91,18 @@ const Main = () => {
         })
     }
 
+    useEffect(() => {
+        getDataRelatoriosLocalStorage();
+    }, []);
+
     return (
         <div className='flex flex-col md:flex-row justify-center items-center h-screen'>
             {/* div componente da esquerda */}
             <div className='bg-[#191919] rounded-[5px] w-full md:w-[700px] h-auto p-4 m-4'>
                 {/* Conteúdo do componente esquerdo */}
             </div>
+
+
             {/* div componente da direita */}
             <div className='bg-[#191919] rounded-[5px] w-full md:w-[500px] h-auto p-4 m-4'>
                 {/* Label e buttton green */}
