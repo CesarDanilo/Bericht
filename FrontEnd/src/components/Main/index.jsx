@@ -78,8 +78,13 @@ const Main = () => {
     };
 
     const getDataRelatoriosLocalStorage = async () => {
-        setGetDadosRelatorioLocal(localStorage.getItem("Lista-de-relatorios"))
-        console.log("Retornando os dados do localStorage: ", getDadosRelatorioLocal())
+        const dados = localStorage.getItem("Lista-de-relatorios");
+        if (dados) {
+            setGetDadosRelatorioLocal(JSON.parse(dados)); // Converter a string em objeto/array
+            console.log("Retornando os dados do localStorage: ", JSON.parse(dados));
+        } else {
+            console.log("Nenhum dado encontrado no localStorage.");
+        }
     }
 
     const clearNextSubmitButton = () => {
@@ -119,12 +124,15 @@ const Main = () => {
                 </div>
                 {/* Cards de relatorios pendentes */}
                 <div className="flex-col p-3 space-y-3 mt-3">
-                    <Cards
-                        empresa={"Nome da empresa aqui"}
-                        descricao={"Descrição do relatorio"}
-                        dataInicial={"01/10/2024"}
-                        dataFinal={"01/10/2024"}
-                    />
+                    {getDadosRelatorioLocal.map((relatorio, index) => (
+                        <Cards
+                            key={index}
+                            empresa={relatorio.empresa}
+                            descricao={relatorio.descricao}
+                            dataInicial={relatorio.dataInicial}
+                            dataFinal={relatorio.dataFinal}
+                        />
+                    ))}
                     {/* Você pode adicionar mais Cards conforme necessário */}
                 </div>
             </div>
