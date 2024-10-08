@@ -79,7 +79,7 @@ const Main = () => {
                     </button>
                 </div>
                 {/* Cards de relatórios pendentes */}
-                <div className="flex-col p-3 space-y-3 mt-3 max-h-[300px] overflow-y-auto"> {/* Ajuste a altura conforme necessário */}
+                <div className="flex-col p-3 space-y-3 mt-3 max-h-[500px] overflow-y-auto"> {/* Ajuste a altura conforme necessário */}
                     {relatorios.map((item) => (
                         <Cards
                             key={item.id}
