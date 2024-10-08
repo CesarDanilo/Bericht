@@ -10,6 +10,8 @@ const Main = () => {
 
     const [relatorios, setRelatorios] = useState([]);
 
+    const [evento, setEvento] = useState(false);
+
     const generateRandomId = () => {
         return Math.floor(Math.random() * 1000) + 1;
     };
@@ -35,6 +37,8 @@ const Main = () => {
 
         saveDataLocalStorage(dadosSubmitEmpresa);
         console.log(JSON.parse(localStorage.getItem("relatorios")));
+        setEvento(true);
+
 
         // Limpar os campos após o envio
         setEmpresa('');
@@ -49,7 +53,9 @@ const Main = () => {
 
     useEffect(() => {
         getRelatorioLocalStorege();
-    }, []);
+        setEvento(!evento)
+
+    }, [evento, setEvento]);
 
     return (
         <div className='flex flex-col md:flex-row justify-center items-center h-screen'>
