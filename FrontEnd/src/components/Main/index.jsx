@@ -61,31 +61,17 @@ const Main = () => {
         dataFinal: ''
     });
 
-    const [getDadosRelatorioLocal, setGetDadosRelatorioLocal] = useState([]);
+    const handleInputChange = () => {
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setNewReport((prev) => ({ ...prev, [name]: value }));
-    };
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
         // Aqui você pode adicionar a lógica para salvar o novo relatório
         console.log('Novo Relatório:', newReport);
-        localStorage.setItem("Lista-de-relatorios", newReport);
         setIsDialogOpen(false); // Fecha o diálogo após o envio
         clearNextSubmitButton();
     };
-
-    const getDataRelatoriosLocalStorage = async () => {
-        const dados = localStorage.getItem("Lista-de-relatorios");
-        if (dados) {
-            setGetDadosRelatorioLocal(JSON.parse(dados)); // Converter a string em objeto/array
-            console.log("Retornando os dados do localStorage: ", JSON.parse(dados));
-        } else {
-            console.log("Nenhum dado encontrado no localStorage.");
-        }
-    }
 
     const clearNextSubmitButton = () => {
         setNewReport({
@@ -96,17 +82,12 @@ const Main = () => {
         })
     }
 
-    useEffect(() => {
-        getDataRelatoriosLocalStorage();
-    }, []);
-
     return (
         <div className='flex flex-col md:flex-row justify-center items-center h-screen'>
             {/* div componente da esquerda */}
             <div className='bg-[#191919] rounded-[5px] w-full md:w-[700px] h-auto p-4 m-4'>
                 {/* Conteúdo do componente esquerdo */}
             </div>
-
 
             {/* div componente da direita */}
             <div className='bg-[#191919] rounded-[5px] w-full md:w-[500px] h-auto p-4 m-4'>
@@ -124,16 +105,9 @@ const Main = () => {
                 </div>
                 {/* Cards de relatorios pendentes */}
                 <div className="flex-col p-3 space-y-3 mt-3">
-                    {getDadosRelatorioLocal.map((relatorio, index) => (
-                        <Cards
-                            key={index}
-                            empresa={relatorio.empresa}
-                            descricao={relatorio.descricao}
-                            dataInicial={relatorio.dataInicial}
-                            dataFinal={relatorio.dataFinal}
-                        />
-                    ))}
-                    {/* Você pode adicionar mais Cards conforme necessário */}
+
+                    <Cards />
+
                 </div>
             </div>
 
