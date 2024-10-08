@@ -1,86 +1,55 @@
-// import Cards from "../RelatoriosPendentes/Cards"
-
-// const Main = () => {
-//     return (
-//         <div className='flex flex-col md:flex-row justify-center items-center h-screen'>
-//             {/* div componente da esquerda */}
-//             <div className='bg-[#191919] rounded-[5px] w-full md:w-[700px] h-auto p-4 m-4'>
-//                 {/* Conteúdo do componente esquerdo */}
-//             </div>
-//             {/* div componente da direita */}
-//             <div className='bg-[#191919] rounded-[5px] w-full md:w-[500px] h-auto p-4 m-4'>
-//                 {/* Conteúdo do componente direito */}
-//                 {/* Label e buttton green */}
-//                 <div className="flex justify-between">
-//                     <h3 className="text-neutral-200">Relatorios pendentes</h3>
-//                     <button
-//                         className=" flex align-middle  justify-center rounded-lg p-0 bg-primary w-14 h-6 ">
-//                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-//                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-//                         </svg>
-//                     </button>
-//                 </div>
-//                 {/* Cards de relatorios pendentes */}
-//                 <div className="flex-col p-3 space-y-3 mt-3" >
-//                     <Cards
-//                         empresa={"Nome da empresa aqui"}
-//                         descricao={"Descrição do relatorio"}
-//                         dataInicial={"01/10/2024"}
-//                         dataFinal={"01/10/2024"}
-//                     />
-//                     <Cards
-//                         empresa={"Nome da empresa aqui"}
-//                         descricao={"Descrição do relatorio"}
-//                         dataInicial={"01/10/2024"}
-//                         dataFinal={"01/10/2024"}
-//                     />
-//                     <Cards
-//                         empresa={"Nome da empresa aqui"}
-//                         descricao={"Descrição do relatorio"}
-//                         dataInicial={"01/10/2024"}
-//                         dataFinal={"01/10/2024"}
-//                     />
-//                 </div>
-//             </div>
-//         </div>
-//     )
-// }
-
-// export default Main;
-
-
 import React, { useEffect, useState } from 'react';
 import Cards from "../RelatoriosPendentes/Cards";
 
 const Main = () => {
     const [isDialogOpen, setIsDialogOpen] = useState(false);
-    const [newReport, setNewReport] = useState({
-        empresa: '',
-        descricao: '',
-        dataInicial: '',
-        dataFinal: ''
-    });
+    const [empresa, setEmpresa] = useState('');
+    const [descricao, setDescricao] = useState('');
+    const [dataInicial, setDataInicial] = useState('');
+    const [dataFinal, setDataFinal] = useState('');
 
-    const handleInputChange = () => {
+    const [relatorios, setRelatorios] = useState([]);
 
-    }
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Aqui você pode adicionar a lógica para salvar o novo relatório
-        console.log('Novo Relatório:', newReport);
-        setIsDialogOpen(false); // Fecha o diálogo após o envio
-        clearNextSubmitButton();
+    const generateRandomId = () => {
+        return Math.floor(Math.random() * 1000) + 1;
     };
 
-    const clearNextSubmitButton = () => {
-        setNewReport({
-            empresa: '',
-            descricao: '',
-            dataInicial: '',
-            dataFinal: ''
-        })
-    }
+    const saveDataLocalStorage = (dadosSubmitEmpresa) => {
+        const relatoriosExistentes = JSON.parse(localStorage.getItem("relatorios")) || [];
+        relatoriosExistentes.push(dadosSubmitEmpresa);
+        localStorage.setItem("relatorios", JSON.stringify(relatoriosExistentes));
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault(); // Prevenir o comportamento padrão do formulário
+
+        setIsDialogOpen(false);
+
+        const dadosSubmitEmpresa = {
+            id: generateRandomId(),
+            empresa,
+            descricao,
+            dataInicial,
+            dataFinal,
+        };
+
+        saveDataLocalStorage(dadosSubmitEmpresa);
+        console.log(JSON.parse(localStorage.getItem("relatorios")));
+
+        // Limpar os campos após o envio
+        setEmpresa('');
+        setDescricao('');
+        setDataInicial('');
+        setDataFinal('');
+    };
+
+    const getRelatorioLocalStorege = () => {
+        setRelatorios(JSON.parse(localStorage.getItem("relatorios")) || []);
+    };
+
+    useEffect(() => {
+        getRelatorioLocalStorege();
+    }, []);
 
     return (
         <div className='flex flex-col md:flex-row justify-center items-center h-screen'>
@@ -91,9 +60,9 @@ const Main = () => {
 
             {/* div componente da direita */}
             <div className='bg-[#191919] rounded-[5px] w-full md:w-[500px] h-auto p-4 m-4'>
-                {/* Label e buttton green */}
+                {/* Label e button green */}
                 <div className="flex justify-between">
-                    <h3 className="text-neutral-200">Relatorios pendentes</h3>
+                    <h3 className="text-neutral-200">Relatórios pendentes</h3>
                     <button
                         className="flex align-middle justify-center rounded-lg p-0 bg-primary w-14 h-6"
                         onClick={() => setIsDialogOpen(true)}
@@ -103,11 +72,17 @@ const Main = () => {
                         </svg>
                     </button>
                 </div>
-                {/* Cards de relatorios pendentes */}
+                {/* Cards de relatórios pendentes */}
                 <div className="flex-col p-3 space-y-3 mt-3">
-
-                    <Cards />
-
+                    {relatorios.map((item) => (
+                        <Cards
+                            key={item.id}
+                            empresa={item.empresa}
+                            descricao={item.descricao}
+                            dataInicial={item.dataInicial}
+                            dataFinal={item.dataFinal}
+                        />
+                    ))}
                 </div>
             </div>
 
@@ -121,32 +96,32 @@ const Main = () => {
                                 type="text"
                                 name="empresa"
                                 placeholder="Nome da Empresa"
-                                value={newReport.empresa}
-                                onChange={handleInputChange}
+                                value={empresa}
+                                onChange={(e) => setEmpresa(e.target.value)}
                                 className="w-full p-2 mb-2 rounded bg-custom-black text-neutral-200"
                                 required
                             />
                             <textarea
                                 name="descricao"
                                 placeholder="Descrição"
-                                value={newReport.descricao}
-                                onChange={handleInputChange}
+                                value={descricao}
+                                onChange={(e) => setDescricao(e.target.value)}
                                 className="w-full p-2 mb-2 rounded bg-custom-black text-neutral-200"
                                 required
                             />
                             <input
                                 type="date"
                                 name="dataInicial"
-                                value={newReport.dataInicial}
-                                onChange={handleInputChange}
+                                value={dataInicial}
+                                onChange={(e) => setDataInicial(e.target.value)}
                                 className="w-full p-2 mb-2 rounded bg-custom-black text-neutral-200"
                                 required
                             />
                             <input
                                 type="date"
                                 name="dataFinal"
-                                value={newReport.dataFinal}
-                                onChange={handleInputChange}
+                                value={dataFinal}
+                                onChange={(e) => setDataFinal(e.target.value)}
                                 className="w-full p-2 mb-2 rounded bg-custom-black text-neutral-200"
                                 required
                             />
