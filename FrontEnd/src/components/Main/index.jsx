@@ -4,7 +4,7 @@ import Cards from "../RelatoriosPendentes/Cards";
 const Main = () => {
     const [isDialogOpenAddRelatorio, setIsDialogOpenAddRelatorio] = useState(false);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
-    const [selectedCard, setSelectedCard] = useState(null); // Estado para armazenar o card selecionado
+    const [selectedCard, setSelectedCard] = useState(null);
     const [empresa, setEmpresa] = useState('');
     const [descricao, setDescricao] = useState('');
     const [dataInicial, setDataInicial] = useState('');
@@ -43,18 +43,28 @@ const Main = () => {
         setDataFinal('');
     };
 
-    const getRelatorioLocalStorege = () => {
+    const getRelatorioLocalStorage = () => {
         setRelatorios(JSON.parse(localStorage.getItem("relatorios")) || []);
     };
 
     useEffect(() => {
-        getRelatorioLocalStorege();
-        setEvento(!evento);
+        getRelatorioLocalStorage();
+        if (evento) {
+            setEvento(!evento);
+        }
     }, [evento]);
 
     const handleCardClick = (item) => {
-        setSelectedCard(item); // Armazena o card selecionado
-        setIsDialogOpen(true);  // Abre o modal
+        setSelectedCard(item);
+        setIsDialogOpen(true);
+    };
+
+    const handleDelete = () => {
+        const updatedRelatorios = relatorios.filter((item) => item.id !== selectedCard.id);
+        setRelatorios(updatedRelatorios);
+        localStorage.setItem("relatorios", JSON.stringify(updatedRelatorios));
+        setIsDialogOpen(false);
+        setSelectedCard(null);
     };
 
     return (
@@ -148,7 +158,7 @@ const Main = () => {
                             <h2 className='text-neutral-200'>Data Final: {selectedCard.dataFinal}</h2>
                         </div>
                         <div className='flex gap-72'>
-                            <button className='flex align-middle justify-center rounded-lg p-0 bg-red-600 w-16 h-7 text-neutral-200'>Excluir</button>
+                            <button className='flex align-middle justify-center rounded-lg p-0 bg-red-600 w-16 h-7 text-neutral-200' onClick={handleDelete}>Excluir</button>
                             <button className='flex align-middle justify-center rounded-lg p-0 bg-primary w-16 h-7' onClick={() => setIsDialogOpen(false)}>Sair</button>
                         </div>
                     </div>
