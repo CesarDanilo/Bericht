@@ -151,15 +151,15 @@ const Main = () => {
             {isDialogOpen && selectedCard && (
                 <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
                     <div className="bg-[#191919] rounded-lg p-6 w-2/3 flex-col">
-                        <h1 className='text-neutral-200'>Empresa: {selectedCard.empresa}</h1>
-                        <h2 className='text-neutral-200'>Descrição: {selectedCard.descricao}</h2>
+                        <h1 className='text-neutral-200 font-semibold mt-3'>Empresa: {selectedCard.empresa}</h1>
+                        <h2 className='text-neutral-200 font-semibold mt-3'>Descrição: {selectedCard.descricao}</h2>
                         <div className="flex gap-52">
-                            <h2 className='text-neutral-200'>Data Inicial: {selectedCard.dataInicial}</h2>
-                            <h2 className='text-neutral-200'>Data Final: {selectedCard.dataFinal}</h2>
+                            <h2 className='text-neutral-200 font-semibold mt-3'>Data Inicial: {selectedCard.dataInicial}</h2>
+                            <h2 className='text-primary font-semibold mt-3 italic'>Data Final: {selectedCard.dataFinal}</h2>
                         </div>
-                        <div className='flex gap-72'>
-                            <button className='flex align-middle justify-center rounded-lg p-0 bg-red-600 w-16 h-7 text-neutral-200' onClick={handleDelete}>Excluir</button>
-                            <button className='flex align-middle justify-center rounded-lg p-0 bg-primary w-16 h-7' onClick={() => setIsDialogOpen(false)}>Sair</button>
+                        <div className='flex gap-80'>
+                            <button className='flex align-middle justify-center rounded-lg p-0  mt-3 bg-red-600 w-16 h-7 text-neutral-200' onClick={handleDelete}>Excluir</button>
+                            <button className='flex align-middle justify-center rounded-lg p-0  mt-3 bg-primary w-16 h-7' onClick={() => setIsDialogOpen(false)}>Sair</button>
                         </div>
                     </div>
                 </div>
