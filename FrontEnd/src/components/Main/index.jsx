@@ -10,12 +10,15 @@ const Main = () => {
 
     const [relatorios, setRelatorios] = useState([]);
 
+    // state que vai disparar o reloud do componente
     const [evento, setEvento] = useState(false);
 
+    // uma função simples para fazer um id alatorio 
     const generateRandomId = () => {
         return Math.floor(Math.random() * 1000) + 1;
     };
 
+    // nessa função vamos salvar os relatorios que ja existe e vamos juntar com os novos
     const saveDataLocalStorage = (dadosSubmitEmpresa) => {
         const relatoriosExistentes = JSON.parse(localStorage.getItem("relatorios")) || [];
         relatoriosExistentes.push(dadosSubmitEmpresa);
@@ -36,9 +39,7 @@ const Main = () => {
         };
 
         saveDataLocalStorage(dadosSubmitEmpresa);
-        console.log(JSON.parse(localStorage.getItem("relatorios")));
         setEvento(true);
-
 
         // Limpar os campos após o envio
         setEmpresa('');
@@ -139,6 +140,24 @@ const Main = () => {
                     </div>
                 </div>
             )}
+
+            {isDialogOpen && (
+                <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+                    <div className="bg-[#191919] rounded-lg p-6 w-2/3 flex-col">
+                        <h1 className='text-neutral-200'>Empresa: </h1>
+                        <h2 className='text-neutral-200'>Descricao: </h2>
+                        <div className="flex gap-52">
+                            <h2 className='text-neutral-200'>Data Inicial: </h2>
+                            <h2 className='text-neutral-200'>Data Final: </h2>
+                        </div>
+                        <div className='flex gap-72'>
+                            <button className='flex align-middle justify-center rounded-lg p-0 bg-red-600 w-16 h-7  text-neutral-200'>Excluir</button>
+                            <button className='flex align-middle justify-center rounded-lg p-0 bg-primary w-16 h-7 '>Sair</button>
+                        </div>
+                    </div>
+                </div>
+            )
+            }
         </div>
 
     );
