@@ -69,15 +69,23 @@ const Main = () => {
 
     return (
         <div className='flex flex-col md:flex-row justify-center items-center h-screen'>
-            <div className='rounded-[5px] w-full md:w-[1000px] h-auto p-4 m-4 flex'>
+            <div className='rounded-[5px] w-full md:w-[1000px] h-auto p-4 m-4 flex gap-4'>
                 {/* Conteúdo do componente esquerdo */}
                 <div className='bg-[#191919] rounded-[5px] w-full md:w-[600px] h-auto p-4 m-4'></div>
-                <div className='bg-[#191919] rounded-[5px] w-full md:w-[300px] h-auto p-4 m-4'></div>
+                <div className='flex-col bg-[#191919] rounded-[5px] p-3 space-y-3 mt-3 max-h-[500px] md:w-[320px] overflow-y-auto'>
+                    <h3 className="text-neutral-200 font-semibold">Historico</h3>
+                    <Cards
+                        empresa={"teste"}
+                        descricao={"decicao teste"}
+                        dataInicial={"20/02/2024"}
+                        dataFinal={"20/02/2024"}
+                    />
+                </div>
             </div>
 
             <div className='bg-[#191919] rounded-[5px] w-full md:w-[500px] h-auto p-4 m-4'>
                 <div className="flex justify-between">
-                    <h3 className="text-neutral-200">Relatórios pendentes</h3>
+                    <h3 className="text-neutral-200 font-semibold	">Relatórios pendentes</h3>
                     <button
                         className="flex align-middle justify-center rounded-lg p-0 bg-primary w-14 h-6"
                         onClick={() => setIsDialogOpenAddRelatorio(true)}
