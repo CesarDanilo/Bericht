@@ -69,8 +69,10 @@ const Main = () => {
 
     return (
         <div className='flex flex-col md:flex-row justify-center items-center h-screen'>
-            <div className='bg-[#191919] rounded-[5px] w-full md:w-[700px] h-auto p-4 m-4'>
+            <div className='rounded-[5px] w-full md:w-[1000px] h-auto p-4 m-4 flex'>
                 {/* Conteúdo do componente esquerdo */}
+                <div className='bg-[#191919] rounded-[5px] w-full md:w-[600px] h-auto p-4 m-4'></div>
+                <div className='bg-[#191919] rounded-[5px] w-full md:w-[300px] h-auto p-4 m-4'></div>
             </div>
 
             <div className='bg-[#191919] rounded-[5px] w-full md:w-[500px] h-auto p-4 m-4'>
