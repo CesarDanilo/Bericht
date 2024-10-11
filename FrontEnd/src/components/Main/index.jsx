@@ -290,7 +290,7 @@ const Main = () => {
             {/* Modal para cadastro de novo relatório */}
             {isDialogOpenAddRelatorio && (
                 <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
-                    <div className="bg-[#191919] rounded-lg p-6 w-80 shadow-lg">
+                    <div className="bg-[#191919] rounded-lg p-6 w-3/4 shadow-lg">
                         <h3 className="text-white font-bold text-xl mb-4">Cadastrar Novo Relatório</h3>
                         <form onSubmit={handleSubmit}>
                             <input
