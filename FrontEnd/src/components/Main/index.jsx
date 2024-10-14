@@ -67,6 +67,11 @@ const Main = () => {
         setSelectedCard(null);
     };
 
+    const handleDeleteHistoryRelatorios = () => {
+        setHistoricoRelatorios([]); // Define o histórico como um array vazio
+        localStorage.setItem("historicoRelatorios", JSON.stringify([])); // Atualiza o localStorage para um array vazio
+    };
+
     const salvarHistoricoRelatorios = async () => {
         const historicoRelatoriosExistentes = JSON.parse(localStorage.getItem("historicoRelatorios")) || [];
         historicoRelatoriosExistentes.push(selectedCard); // Adiciona o item selecionado ao histórico existente
@@ -96,6 +101,9 @@ const Main = () => {
                 {/* Histórico */}
                 <div className="flex flex-col bg-[#191919] rounded-lg p-4 space-y-4 md:w-[30%] max-h-[500px] overflow-y-auto">
                     <h3 className="text-white font-bold text-lg">Histórico</h3>
+                    <div>
+                        <button className="text-primary" onClick={() => { handleDeleteHistoryRelatorios() }}>Limpar Historico</button>
+                    </div>
                     {historicoRelatorios.map((item) => (
                         <div key={item.id}>
                             <Cards
