@@ -49,21 +49,17 @@ const Main = () => {
         setRelatorios(JSON.parse(localStorage.getItem("relatorios")) || []);
     };
 
-    useEffect(() => {
-        getRelatorioLocalStorage();
-        if (evento) {
-            setEvento(!evento);
-        }
-    }, [evento]);
-
     const handleCardClick = (item) => {
         setSelectedCard(item);
         setIsDialogOpen(true);
     };
 
     const handleDelete = async () => {
-        setHistoricoRelatorios(relatorios.filter((item) => item.id == selectedCard.id));
-        salvarHistoricoRelatorios();
+        // Atualiza o histórico de relatórios
+        setHistoricoRelatorios([...historicoRelatorios, selectedCard]); // Adiciona o item selecionado ao histórico
+        await salvarHistoricoRelatorios(); // Chama a função para salvar o histórico
+
+        // Atualiza os relatórios
         const updatedRelatorios = relatorios.filter((item) => item.id !== selectedCard.id);
         setRelatorios(updatedRelatorios);
         localStorage.setItem("relatorios", JSON.stringify(updatedRelatorios));
@@ -73,9 +69,21 @@ const Main = () => {
 
     const salvarHistoricoRelatorios = async () => {
         const historicoRelatoriosExistentes = JSON.parse(localStorage.getItem("historicoRelatorios")) || [];
-        historicoRelatorios.push(historicoRelatorios);
-        localStorage.setItem("historicoRelatorios", JSON.stringify(historicoRelatorios));
+        historicoRelatoriosExistentes.push(selectedCard); // Adiciona o item selecionado ao histórico existente
+        localStorage.setItem("historicoRelatorios", JSON.stringify(historicoRelatoriosExistentes));
+    };
+
+    const gethistoricoRelatoriosExistentes = () => {
+        setHistoricoRelatorios(JSON.parse(localStorage.getItem("relatorios")) || []);
     }
+
+    useEffect(() => {
+        getRelatorioLocalStorage();
+        gethistoricoRelatoriosExistentes();
+        if (evento) {
+            setEvento(!evento);
+        }
+    }, [evento]);
 
     return (
         <div className="flex flex-col lg:flex-row justify-center items-center min-h-screen p-4">
@@ -88,12 +96,16 @@ const Main = () => {
                 {/* Histórico */}
                 <div className="flex flex-col bg-[#191919] rounded-lg p-4 space-y-4 md:w-[30%] max-h-[500px] overflow-y-auto">
                     <h3 className="text-white font-bold text-lg">Histórico</h3>
-                    <Cards
-                        empresa={"teste"}
-                        descricao={"decicao teste"}
-                        dataInicial={"20/02/2024"}
-                        dataFinal={"20/02/2024"}
-                    />
+                    {historicoRelatorios.map((item) => (
+                        <div key={item.id} onClick={() => handleCardClick(item)}>
+                            <Cards
+                                empresa={item.empresa}
+                                descricao={item.descricao}
+                                dataInicial={item.dataInicial}
+                                dataFinal={item.dataFinal}
+                            />
+                        </div>
+                    ))}
                 </div>
             </div>
 
