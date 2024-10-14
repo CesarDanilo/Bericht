@@ -74,7 +74,7 @@ const Main = () => {
     };
 
     const gethistoricoRelatoriosExistentes = () => {
-        setHistoricoRelatorios(JSON.parse(localStorage.getItem("relatorios")) || []);
+        setHistoricoRelatorios(JSON.parse(localStorage.getItem("historicoRelatorios")) || []);
     }
 
     useEffect(() => {
@@ -97,7 +97,7 @@ const Main = () => {
                 <div className="flex flex-col bg-[#191919] rounded-lg p-4 space-y-4 md:w-[30%] max-h-[500px] overflow-y-auto">
                     <h3 className="text-white font-bold text-lg">Histórico</h3>
                     {historicoRelatorios.map((item) => (
-                        <div key={item.id} onClick={() => handleCardClick(item)}>
+                        <div key={item.id}>
                             <Cards
                                 empresa={item.empresa}
                                 descricao={item.descricao}
