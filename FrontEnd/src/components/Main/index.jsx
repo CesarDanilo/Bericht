@@ -15,8 +15,6 @@ const Main = () => {
 
     const [historicoRelatorios, setHistoricoRelatorios] = useState([]);
 
-    const [relatoriosConcluidos, setRelatoriosConcluidos] = useState([]);
-
     const generateRandomId = () => {
         return Math.floor(Math.random() * 1000) + 1;
     };
@@ -60,6 +58,7 @@ const Main = () => {
     const handleDelete = async () => {
         // Atualiza o histórico de relatórios
         setHistoricoRelatorios([...historicoRelatorios, selectedCard]); // Adiciona o item selecionado ao histórico
+        salvarRelatoriosConcluidos([historicoRelatorios]);
         await salvarHistoricoRelatorios(); // Chama a função para salvar o histórico
 
         // Atualiza os relatórios
@@ -85,7 +84,11 @@ const Main = () => {
         setHistoricoRelatorios(JSON.parse(localStorage.getItem("historicoRelatorios")) || []);
     }
 
-
+    const salvarRelatoriosConcluidos = (relatorios) => {
+        const relatoriosConcluidos = JSON.parse(localStorage.getItem("relatoriosConcluidos")) || [];
+        relatoriosConcluidos.push(relatorios)
+        localStorage.setItem("relatoriosConcluidos", JSON.stringify(relatoriosConcluidos));
+    }
 
     useEffect(() => {
         getRelatorioLocalStorage();
