@@ -14,6 +14,7 @@ const Main = () => {
     const [evento, setEvento] = useState(false);
 
     const [historicoRelatorios, setHistoricoRelatorios] = useState([]);
+    const [relatoriosConcluidos, setRelatoriosConcluidos] = useState([]);
 
     const generateRandomId = () => {
         return Math.floor(Math.random() * 1000) + 1;
@@ -90,9 +91,14 @@ const Main = () => {
         localStorage.setItem("relatoriosConcluidos", JSON.stringify(relatoriosConcluidos));
     }
 
+    const getRelatoriosConcluidos = () => {
+        setRelatoriosConcluidos(JSON.parse(localStorage.getItem("relatoriosConcluidos")) || [])
+    }
+
     useEffect(() => {
         getRelatorioLocalStorage();
         gethistoricoRelatoriosExistentes();
+        getRelatoriosConcluidos();
         if (evento) {
             setEvento(!evento);
         }
@@ -137,7 +143,7 @@ const Main = () => {
                 </div>
                 <div className="flex rounded-lg w-full md:w-[60%] gap-4">
                     <CardsGadgets descricao={"Relatorios pendente"} valor={"+23"} />
-                    <CardsGadgets descricao={"Relatorios atrazados"} valor={"+50"} />
+                    <CardsGadgets descricao={"Relatorios Concluidos"} valor={relatoriosConcluidos.length} />
                 </div>
             </div>
 
