@@ -93,31 +93,44 @@ const Main = () => {
     return (
         <div className="flex flex-col lg:flex-row justify-center items-center min-h-screen p-4">
             {/* Container Principal */}
-            <div className="flex flex-col md:flex-row w-full max-w-[1280px] gap-6">
+            <div className="flex flex-col md:flex-col w-full max-w-[1280px] gap-4">
                 {/* Componente Esquerdo */}
-                <div className="bg-[#191919] rounded-lg w-full md:w-[60%] p-6 shadow-md">
-                    {/* Conteúdo dentro do componente esquerdo */}
-                </div>
-                {/* Histórico */}
-                <div className="flex flex-col bg-[#191919] rounded-lg p-4 space-y-4 md:w-[30%] max-h-[500px] overflow-y-auto">
-                    <h3 className="text-white font-bold text-lg">Histórico</h3>
-                    {
-                        historicoRelatorios.length > 0 && (
-                            <div>
-                                <button className="text-primary" onClick={() => { handleDeleteHistoryRelatorios() }}>Limpar Historico</button>
+                <div className='flex w-full gap-4'>
+                    <div className="bg-[#191919] rounded-lg w-full md:w-[60%] p-6 shadow-md">
+                        {/* Conteúdo dentro do componente esquerdo */}
+                    </div>
+                    {/* Histórico */}
+                    <div className="flex flex-col bg-[#191919] rounded-lg p-4 space-y-4 md:w-[20%] max-h-[500px] overflow-y-auto">
+                        <h3 className="text-white font-bold text-lg">Histórico</h3>
+                        {
+                            historicoRelatorios.length > 0 && (
+                                <div>
+                                    <button className="text-primary" onClick={() => { handleDeleteHistoryRelatorios() }}>Limpar Historico</button>
+                                </div>
+                            )
+                        }
+                        {historicoRelatorios.map((item) => (
+                            <div key={item.id}>
+                                <Cards
+                                    empresa={item.empresa}
+                                    // descricao={item.descricao}
+                                    // dataInicial={item.dataInicial}
+                                    dataFinal={item.dataFinal}
+                                />
                             </div>
-                        )
-                    }
-                    {historicoRelatorios.map((item) => (
-                        <div key={item.id}>
-                            <Cards
-                                empresa={item.empresa}
-                                descricao={item.descricao}
-                                dataInicial={item.dataInicial}
-                                dataFinal={item.dataFinal}
-                            />
-                        </div>
-                    ))}
+                        ))}
+                    </div>
+                </div>
+                <div className="flex rounded-lg w-full md:w-[60%] gap-4">
+                    <div className="bg-[#191919] rounded-lg w-full md:w-[50%] p-6 shadow-md">
+                        {/* Conteúdo dentro do componente esquerdo */}
+                    </div>
+                    <div className="flex bg-[#191919] rounded-lg w-full md:w-[50%] p-6 shadow-md justify-center align-middle">
+                        {/* Conteúdo dentro do componente esquerdo */}
+                        <h1 className="text-5xl text-primary">
+                            +50
+                        </h1>
+                    </div>
                 </div>
             </div>
 
@@ -134,7 +147,7 @@ const Main = () => {
                         </svg>
                     </button>
                 </div>
-                <div className="flex flex-col space-y-4 mt-4 max-h-[500px] overflow-y-auto">
+                <div className="flex flex-col space-y-4 mt-4 max-h-[400px] overflow-y-auto">
                     {relatorios.map((item) => (
                         <div key={item.id} onClick={() => handleCardClick(item)}>
                             <Cards
