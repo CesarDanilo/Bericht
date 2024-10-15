@@ -15,6 +15,8 @@ const Main = () => {
 
     const [historicoRelatorios, setHistoricoRelatorios] = useState([]);
 
+    const [relatoriosConcluidos, setRelatoriosConcluidos] = useState([]);
+
     const generateRandomId = () => {
         return Math.floor(Math.random() * 1000) + 1;
     };
@@ -82,6 +84,8 @@ const Main = () => {
     const gethistoricoRelatoriosExistentes = () => {
         setHistoricoRelatorios(JSON.parse(localStorage.getItem("historicoRelatorios")) || []);
     }
+
+
 
     useEffect(() => {
         getRelatorioLocalStorage();
