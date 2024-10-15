@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Cards from "../RelatoriosPendentes/Cards";
+import CardsGadgets from '../Gadgets/Cards';
 
 const Main = () => {
     const [isDialogOpenAddRelatorio, setIsDialogOpenAddRelatorio] = useState(false);
@@ -122,15 +123,8 @@ const Main = () => {
                     </div>
                 </div>
                 <div className="flex rounded-lg w-full md:w-[60%] gap-4">
-                    <div className="bg-[#191919] rounded-lg w-full md:w-[50%] p-6 shadow-md">
-                        {/* Conteúdo dentro do componente esquerdo */}
-                    </div>
-                    <div className="flex bg-[#191919] rounded-lg w-full md:w-[50%] p-6 shadow-md justify-center align-middle">
-                        {/* Conteúdo dentro do componente esquerdo */}
-                        <h1 className="text-5xl text-primary">
-                            +50
-                        </h1>
-                    </div>
+                    <CardsGadgets descricao={"Relatorios atrazados"} valor={"+50"} />
+                    <CardsGadgets descricao={"Relatorios atrazados"} valor={"+50"} />
                 </div>
             </div>
 
