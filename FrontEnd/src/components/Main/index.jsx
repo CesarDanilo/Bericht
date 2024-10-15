@@ -101,29 +101,35 @@ const Main = () => {
                         {/* Conteúdo dentro do componente esquerdo */}
                     </div>
                     {/* Histórico */}
-                    <div className="flex flex-col bg-[#191919] rounded-lg p-4 space-y-4 md:w-[20%] max-h-[500px] overflow-y-auto">
-                        <h3 className="text-white font-bold text-lg">Histórico</h3>
-                        {
-                            historicoRelatorios.length > 0 && (
+                    {
+                        historicoRelatorios.length > 0 && (
+                            <div className="flex flex-col bg-[#191919] rounded-lg p-4 space-y-4 md:w-[20%] max-h-[500px] overflow-y-auto">
+                                <h3 className="text-white font-bold text-lg">Histórico</h3>
+
                                 <div>
                                     <button className="text-primary" onClick={() => { handleDeleteHistoryRelatorios() }}>Limpar Historico</button>
                                 </div>
-                            )
-                        }
-                        {historicoRelatorios.map((item) => (
-                            <div key={item.id}>
-                                <Cards
-                                    empresa={item.empresa}
-                                    // descricao={item.descricao}
-                                    // dataInicial={item.dataInicial}
-                                    dataFinal={item.dataFinal}
-                                />
+
+                                {historicoRelatorios.map((item) => (
+                                    <div key={item.id}>
+                                        <Cards
+                                            empresa={item.empresa}
+                                            // descricao={item.descricao}
+                                            // dataInicial={item.dataInicial}
+                                            dataFinal={item.dataFinal}
+                                        />
+                                    </div>
+                                ))}
                             </div>
-                        ))}
-                    </div>
+                        )
+                    }
                 </div>
                 <div className="flex rounded-lg w-full md:w-[60%] gap-4">
+                    <CardsGadgets descricao={"Relatorios pendente"} valor={"+23"} />
                     <CardsGadgets descricao={"Relatorios atrazados"} valor={"+50"} />
+                </div>
+                <div className="flex rounded-lg w-full md:w-[60%] gap-4">
+                    <CardsGadgets descricao={"Relatorios pendente"} valor={"+23"} />
                     <CardsGadgets descricao={"Relatorios atrazados"} valor={"+50"} />
                 </div>
             </div>
