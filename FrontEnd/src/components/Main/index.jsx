@@ -16,6 +16,7 @@ const Main = () => {
 
     const [historicoRelatorios, setHistoricoRelatorios] = useState([]);
     const [relatoriosConcluidos, setRelatoriosConcluidos] = useState([]);
+    const [relatoriosAtrazados, setRelatoriosAtrazados] = useState(0); // Inicialize como 0
 
     const generateRandomId = () => {
         return Math.floor(Math.random() * 1000) + 1;
@@ -89,24 +90,38 @@ const Main = () => {
 
     const salvarRelatoriosConcluidos = (relatorios) => {
         const relatoriosConcluidos = JSON.parse(localStorage.getItem("relatoriosConcluidos")) || [];
-        relatoriosConcluidos.push(relatorios)
+        relatoriosConcluidos.push(relatorios);
         localStorage.setItem("relatoriosConcluidos", JSON.stringify(relatoriosConcluidos));
     }
 
     const getRelatoriosConcluidos = () => {
-        setRelatoriosConcluidos(JSON.parse(localStorage.getItem("relatoriosConcluidos")) || [])
-        setEvento(true)
+        setRelatoriosConcluidos(JSON.parse(localStorage.getItem("relatoriosConcluidos")) || []);
+        setEvento(true);
     }
+
+    const contarRelatoriosAtrasados = (relatorios) => {
+        const hoje = new Date();
+        let atrasados = 0;
+
+        relatorios.forEach(relatorio => {
+            const dataFinal = new Date(relatorio.dataFinal);
+            if (dataFinal < hoje) {
+                atrasados++;
+            }
+        });
+
+        setRelatoriosAtrazados(atrasados); // Atualiza o estado com a quantidade de atrasados
+    };
 
     useEffect(() => {
         getRelatorioLocalStorage();
         gethistoricoRelatoriosExistentes();
         getRelatoriosConcluidos();
+        contarRelatoriosAtrasados(relatorios); // Chama a função para contar relatórios atrasados
         if (evento) {
             setEvento(!evento);
         }
-    }, [evento]);
-
+    }, [evento, relatorios]); // Adiciona relatorios ao array de dependências
 
     return (
         <div className="flex flex-col lg:flex-row justify-center items-start min-h-screen p-10">
@@ -118,7 +133,6 @@ const Main = () => {
                         {/* Conteúdo dentro do componente esquerdo */}
                     </div>
                     {/* Histórico */}
-
                     {
                         historicoRelatorios.length > 0 && (
                             <div className="flex flex-col bg-[#191919] rounded-lg p-4 space-y-4 md:w-[20%] max-h-[384px] overflow-y-auto scrollbar-hidden">
@@ -141,14 +155,13 @@ const Main = () => {
                             </div>
                         )
                     }
-
                 </div>
                 <div className="flex rounded-lg w-full md:w-[60%] gap-4">
                     <CardsGadgets descricao={"Relatorios pendente"} valor={relatorios.length} />
-                    <CardsGadgets descricao={"Relatorios atrazados"} valor={"+50"} />
+                    <CardsGadgets descricao={"Relatorios atrazados"} valor={relatoriosAtrazados} />
                 </div>
                 <div className="flex rounded-lg w-full md:w-[60%] gap-4">
-                    <CardsGadgets descricao={"Relatorios pendente"} valor={"+23"} />
+                    <CardsGadgets descricao={"Total de Relatorios"} valor={relatorios.length + relatoriosConcluidos.length} />
                     <CardsGadgets descricao={"Relatorios Concluidos"} valor={relatoriosConcluidos.length} />
                 </div>
             </div>
@@ -247,9 +260,7 @@ const Main = () => {
                 </div>
             )}
         </div>
-
     );
 };
 
 export default Main;
-
