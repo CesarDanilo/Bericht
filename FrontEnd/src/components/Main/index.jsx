@@ -374,20 +374,38 @@ const Main = () => {
 
             {/* Modal para exibir detalhes do card selecionado */}
             {isDialogOpen && selectedCard && (
+                // <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+                //     <div className="bg-[#191919] rounded-lg p-6 w-full max-w-[768px] shadow-lg">
+                //         <h1 className='text-neutral-200 font-semibold mt-3'>Empresa: {selectedCard.empresa}</h1>
+                //         <h2 className='text-neutral-200 font-semibold mt-3'>Descrição: {selectedCard.descricao}</h2>
+                //         <div className="flex justify-between">
+                //             <h2 className='text-neutral-200 font-semibold mt-3'>Data Inicial: {selectedCard.dataInicial}</h2>
+                //             <h2 className='text-primary font-semibold mt-3 italic'>Data Final: {selectedCard.dataFinal}</h2>
+                //         </div>
+                //         <div className='flex justify-between mt-3'>
+                //             <button className='bg-red-600 rounded-lg p-1 text-neutral-200' onClick={handleDelete}>Excluir</button>
+                //             <button className='bg-primary rounded-lg p-1' onClick={() => setIsDialogOpen(false)}>Sair</button>
+                //         </div>
+                //     </div>
+                // </div>
                 <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
-                    <div className="bg-[#191919] rounded-lg p-6 w-full max-w-[768px] shadow-lg">
-                        <h1 className='text-neutral-200 font-semibold mt-3'>Empresa: {selectedCard.empresa}</h1>
-                        <h2 className='text-neutral-200 font-semibold mt-3'>Descrição: {selectedCard.descricao}</h2>
+                    <div className="bg-[#191919] rounded-lg p-6 w-full max-w-[900px] shadow-lg"> {/* Aumentei o max-w */}
+                        <h1 className="text-neutral-200 mt-3">Empresa: {selectedCard.empresa}</h1>
+                        <h2 className="text-neutral-200 mt-3">Descrição: {selectedCard.descricao}</h2>
                         <div className="flex justify-between">
-                            <h2 className='text-neutral-200 font-semibold mt-3'>Data Inicial: {selectedCard.dataInicial}</h2>
-                            <h2 className='text-primary font-semibold mt-3 italic'>Data Final: {selectedCard.dataFinal}</h2>
+                            <h2 className="text-neutral-200 mt-3">Data Inicial: {selectedCard.dataInicial}</h2>
+                            <h2 className="text-primary font-semibold mt-3 italic">Data Final: {selectedCard.dataFinal}</h2>
                         </div>
-                        <div className='flex justify-between mt-3'>
-                            <button className='bg-red-600 rounded-lg p-1 text-neutral-200' onClick={handleDelete}>Excluir</button>
-                            <button className='bg-primary rounded-lg p-1' onClick={() => setIsDialogOpen(false)}>Sair</button>
+                        <div className="flex justify-between mt-5"> {/* Aumentei o espaçamento superior */}
+                            <button className="bg-red-500 rounded-lg px-4 py-2 text-neutral-200" onClick={handleDelete}>Excluir</button> {/* Aumentei o tamanho dos botões */}
+                            <div className="flex space-x-2"> {/* Criei um contêiner para os dois botões */}
+                                <button className="bg-primary rounded-lg px-4 py-2 text-black" onClick={() => setIsDialogOpen(false)}>Sair</button> {/* Botão Sair */}
+                                <button className="bg-green-600 rounded-lg px-4 py-2 text-neutral-200">Concluir</button> {/* Botão Concluir */}
+                            </div>
                         </div>
                     </div>
                 </div>
+
             )}
         </div>
 
