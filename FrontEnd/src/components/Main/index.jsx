@@ -110,7 +110,7 @@ const Main = () => {
             <div className="flex flex-col md:flex-col w-full max-w-[1280px] gap-4">
                 {/* Componente Esquerdo */}
                 <div className='flex w-full gap-4'>
-                    <div className="bg-[#191919] rounded-lg w-full md:w-[60%] p-6 shadow-md">
+                    <div className="bg-[#191919] rounded-lg w-full md:w-[60%] h-96 p-6 shadow-md">
                         {/* Conteúdo dentro do componente esquerdo */}
                     </div>
                     {/* Histórico */}
