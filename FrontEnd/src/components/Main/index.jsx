@@ -108,7 +108,7 @@ const Main = () => {
     }, [evento]);
 
     return (
-        <div className="flex flex-col lg:flex-row justify-center items-center min-h-screen p-4">
+        <div className="flex flex-col lg:flex-row justify-center items-start min-h-screen p-10">
             {/* Container Principal */}
             <div className="flex flex-col md:flex-col w-full gap-4">
                 {/* Componente Esquerdo */}
@@ -118,11 +118,8 @@ const Main = () => {
                     </div>
                     {/* Histórico */}
 
-
-
                     {
                         historicoRelatorios.length > 0 && (
-
                             <div className="flex flex-col bg-[#191919] rounded-lg p-4 space-y-4 md:w-[20%] max-h-[384px] overflow-y-auto scrollbar-hidden">
                                 <h3 className="text-white font-bold text-lg">Histórico</h3>
 
@@ -146,8 +143,6 @@ const Main = () => {
                         )
                     }
 
-
-
                 </div>
                 <div className="flex rounded-lg w-full md:w-[60%] gap-4">
                     <CardsGadgets descricao={"Relatorios pendente"} valor={"+23"} />
@@ -160,7 +155,7 @@ const Main = () => {
             </div>
 
             {/* Relatórios Pendentes */}
-            <div className="bg-[#191919] rounded-lg w-full md:w-[680px] p-6 mt-6 shadow-md">
+            <div className="bg-[#191919] rounded-lg w-full md:w-[680px] h-96 p-6 shadow-md">
                 <div className="flex justify-between items-center">
                     <h3 className="text-white font-bold text-lg">Relatórios Pendentes</h3>
                     <button
