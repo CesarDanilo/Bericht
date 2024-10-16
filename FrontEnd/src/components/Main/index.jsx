@@ -298,7 +298,7 @@ const Main = () => {
             </div>
 
             {/* Relatórios Pendentes */}
-            <div className="bg-[#191919] rounded-lg w-full md:w-[680px] h-96 p-6 shadow-md">
+            <div className="bg-[#191919] rounded-lg w-full md:w-[680px] h-96 p-6 mt-4 shadow-md">
                 <div className="flex justify-between items-center">
                     <h3 className="text-white font-bold text-lg">Relatórios Pendentes</h3>
                     <button
