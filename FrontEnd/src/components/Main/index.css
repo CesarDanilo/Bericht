@@ -1,0 +1,8 @@
+/* Estilos da barra de rolagem */
+.scrollbar-hidden {
+    scrollbar-width: none; /* Para navegadores Firefox */
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+    display: none; /* Oculta a barra de rolagem no Chrome, Safari e Edge */
+}

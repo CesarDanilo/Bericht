@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Cards from "../RelatoriosPendentes/Cards";
 import CardsGadgets from '../Gadgets/Cards';
+import './index.css';
 
 const Main = () => {
     const [isDialogOpenAddRelatorio, setIsDialogOpenAddRelatorio] = useState(false);
@@ -116,13 +117,19 @@ const Main = () => {
                         {/* Conteúdo dentro do componente esquerdo */}
                     </div>
                     {/* Histórico */}
+
+
+
                     {
                         historicoRelatorios.length > 0 && (
-                            <div className="flex flex-col bg-[#191919] rounded-lg p-4 space-y-4 md:w-[20%] max-h-[500px] overflow-y-auto">
+
+                            <div className="flex flex-col bg-[#191919] rounded-lg p-4 space-y-4 md:w-[20%] max-h-[384px] overflow-y-auto scrollbar-hidden">
                                 <h3 className="text-white font-bold text-lg">Histórico</h3>
 
                                 <div>
-                                    <button className="text-primary" onClick={() => { handleDeleteHistoryRelatorios() }}>Limpar Historico</button>
+                                    <button className="text-primary" onClick={() => { handleDeleteHistoryRelatorios() }}>
+                                        Limpar Histórico
+                                    </button>
                                 </div>
 
                                 {historicoRelatorios.map((item) => (
@@ -138,6 +145,9 @@ const Main = () => {
                             </div>
                         )
                     }
+
+
+
                 </div>
                 <div className="flex rounded-lg w-full md:w-[60%] gap-4">
                     <CardsGadgets descricao={"Relatorios pendente"} valor={"+23"} />
