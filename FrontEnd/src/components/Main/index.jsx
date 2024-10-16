@@ -73,6 +73,7 @@ const Main = () => {
     const handleDeleteHistoryRelatorios = () => {
         setHistoricoRelatorios([]); // Define o histórico como um array vazio
         localStorage.setItem("historicoRelatorios", JSON.stringify([])); // Atualiza o localStorage para um array vazio
+        setEvento(true);
     };
 
     const salvarHistoricoRelatorios = async () => {
@@ -93,6 +94,7 @@ const Main = () => {
 
     const getRelatoriosConcluidos = () => {
         setRelatoriosConcluidos(JSON.parse(localStorage.getItem("relatoriosConcluidos")) || [])
+        setEvento(true)
     }
 
     useEffect(() => {
@@ -107,7 +109,7 @@ const Main = () => {
     return (
         <div className="flex flex-col lg:flex-row justify-center items-center min-h-screen p-4">
             {/* Container Principal */}
-            <div className="flex flex-col md:flex-col w-full max-w-[1280px] gap-4">
+            <div className="flex flex-col md:flex-col w-full gap-4">
                 {/* Componente Esquerdo */}
                 <div className='flex w-full gap-4'>
                     <div className="bg-[#191919] rounded-lg w-full md:w-[60%] h-96 p-6 shadow-md">
@@ -148,14 +150,14 @@ const Main = () => {
             </div>
 
             {/* Relatórios Pendentes */}
-            <div className="bg-[#191919] rounded-lg w-full md:w-[500px] p-6 mt-6 shadow-md">
+            <div className="bg-[#191919] rounded-lg w-full md:w-[680px] p-6 mt-6 shadow-md">
                 <div className="flex justify-between items-center">
                     <h3 className="text-white font-bold text-lg">Relatórios Pendentes</h3>
                     <button
                         className="flex justify-center items-center rounded-full bg-primary w-8 h-8"
                         onClick={() => setIsDialogOpenAddRelatorio(true)}
                     >
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 text-black">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                         </svg>
                     </button>
